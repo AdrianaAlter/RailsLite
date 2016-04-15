@@ -1,18 +1,22 @@
 require 'rack'
-require_relative '../lib/controller_base'
-
-class MyController < ControllerBase
-  def go
-    render :show
-  end
-end
 
 app = Proc.new do |env|
+
   req = Rack::Request.new(env)
   res = Rack::Response.new
-  MyController.new(req, res).go
+
+  res['Content-Type'] = 'text/html'
+
+  if req.path
+    res.write("#{req.path}")
+  else
+    res.write("Hello world!")
+  end
+
   res.finish
+
 end
+
 
 Rack::Server.start(
   app: app,

@@ -14,7 +14,8 @@ $statuses = [
   { id: 3, cat_id: 1, text: "Curie is cool!" }
 ]
 
-class StatusesController < ControllerBase
+class ControllerBase
+
   def index
     statuses = $statuses.select do |s|
       s[:cat_id] == Integer(params['cat_id'])
@@ -22,12 +23,15 @@ class StatusesController < ControllerBase
 
     render_content(statuses.to_json, "application/json")
   end
+
 end
 
 class Cats2Controller < ControllerBase
+
   def index
     render_content($cats.to_json, "application/json")
   end
+
 end
 
 router = Router.new
