@@ -3,7 +3,7 @@ require 'json'
 class Session
 
   def initialize(req)
-    cookie_value = req.cookies["_rails_lite_app"]
+    cookie_value = req.cookies["_softserver_app"]
     @cookie_value = cookie_value ?  JSON.parse(cookie_value) : {}
   end
 
@@ -16,7 +16,7 @@ class Session
   end
 
   def store_session(res)
-    res.set_cookie("_rails_lite_app", { :path => "/", :value => @cookie_value.to_json })
+    res.set_cookie("_softserver_app", { :path => "/", :value => @cookie_value.to_json })
   end
 
 end
