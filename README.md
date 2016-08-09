@@ -8,7 +8,7 @@ More specifically, Softserver's features include:
 
 Softserver uses Rack middleware to start a webserver and pass apps to it:
 
-<pre><code>
+```ruby
 app = Proc.new do |env|
   req = Rack::Request.new(env)
   res = Rack::Response.new
@@ -20,7 +20,7 @@ Rack::Server.start(
   app: app,
   Port: 3000
 )
-</code></pre>
+```
 
 ##Controller
 
@@ -36,7 +36,6 @@ end
 
 It also safeguards against double renders/redirects:
 
-<pre><code>  
 ```ruby
   def already_built_response?
     @already_built_response == true
@@ -64,14 +63,11 @@ It also safeguards against double renders/redirects:
     end
   end
 ```
-</code></pre>
-
-
 ##Router:
 
 Softserver implements Regex-based route matching, including router methods corresponding to HTTP's "GET," "POST," "PATCH", and "DELETE" methods:
 
-<pre><code>
+```ruby
 [:get, :post, :put, :delete].each do |http_method|
   define_method(http_method) do |pattern, controller_class, action_name|
     self.add_route(pattern, http_method, controller_class, action_name)
@@ -87,15 +83,15 @@ def run(req, res)
   route = match(req)
   route.nil? ? res.status = 404 : route.run(req, res)
 end
-</code></pre>
+```
 
 ##Sessions
 
 Softserver's HTTP responses include cookies to persist client information--including keeping track of the number of requests--serialized in JSON.
 
-<pre><code>
+```ruby
 def initialize(req)
   cookie_value = req.cookies["softserver_app"]
   @cookie_value = cookie_value ?  JSON.parse(cookie_value) : {}
 end
-</pre></code>
+```
