@@ -27,16 +27,20 @@ Rack::Server.start(
 The controller handles requests, and uses binding to implement ERB template construction and evaluation:
 
 <pre><code>
+```ruby
 def render(template_name)
   template_file = File.read(File.join("views", "#{self.class.to_s.underscore}", "#{template_name}.html.erb"))
   content = ERB.new(template_file).result(binding)
   render_content(content, "text/html")
 end
+```
 </code></pre>
 
 It also safeguards against double renders/redirects:
 
-<pre><code>  def already_built_response?
+<pre><code>  
+```ruby
+  def already_built_response?
     @already_built_response == true
   end
 
@@ -61,8 +65,8 @@ It also safeguards against double renders/redirects:
       session.store_session(@res)
     end
   end
-
-  </code></pre>
+```
+</code></pre>
 
 
 ##Router:
