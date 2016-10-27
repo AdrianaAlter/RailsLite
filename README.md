@@ -63,7 +63,7 @@ It also safeguards against double renders/redirects:
     end
   end
 ```
-##Router:
+##Router
 
 Softserver implements Regex-based route matching, including router methods corresponding to HTTP's "GET," "POST," "PATCH", and "DELETE" methods:
 
